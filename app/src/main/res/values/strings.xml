@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherForecastApp</string>
+    <string name="temperature_value">%1$d%2$s</string>
+
 </resources>

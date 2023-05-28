@@ -6,16 +6,16 @@
 
     <EditText
         android:id="@+id/searchBar"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_width="400dp"
+        android:layout_height="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="Search"
+        android:scrollbarSize="12dp"
         android:layout_margin="8dp"
         android:drawableEnd="@drawable/search"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"/>
-
 
     <TextView
         android:id="@+id/temperature"
@@ -53,36 +53,29 @@
         app:layout_constraintStart_toStartOf="@+id/main"
         app:layout_constraintTop_toBottomOf="@id/main" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:layout_marginTop="104dp"
-        android:outlineProvider="none"
-        app:cardBackgroundColor="#9CD0FA"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchBar"
-        app:layout_constraintVertical_bias="0.691">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/card1"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="24dp"-->
+<!--        android:layout_marginTop="104dp"-->
+<!--        android:outlineProvider="none"-->
+<!--        app:cardCornerRadius="8dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.333"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/searchBar"-->
+<!--        app:layout_constraintVertical_bias="0.745">-->
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/charactersList"
+            android:id="@+id/forecastsList"
             android:layout_width="0dp"
             android:layout_height="300dp"
-            app:layout_constraintBottom_toTopOf="@+id/loadMoreloader"
+            android:layout_marginTop="43dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBar" />
-
-<!--        <ProgressBar-->
-<!--            android:id="@+id/loader"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+            app:layout_constraintTop_toBottomOf="@+id/location" />
 
         <ProgressBar
             android:id="@+id/loadMoreloader"
@@ -92,7 +85,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-    </androidx.cardview.widget.CardView>
+
+
+        <!--        <ProgressBar-->
+        <!--            android:id="@+id/loader"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--    </androidx.cardview.widget.CardView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
