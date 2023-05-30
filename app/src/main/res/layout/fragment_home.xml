@@ -1,101 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lightblue">
 
-    <EditText
-        android:id="@+id/searchBar"
-        android:layout_width="400dp"
-        android:layout_height="45dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:hint="Search"
-        android:scrollbarSize="12dp"
-        android:layout_margin="8dp"
-        android:drawableEnd="@drawable/search"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/temperature"
-        android:layout_width="151dp"
-        android:layout_height="111dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:text="21"
-        android:textColor="@color/black"
-        android:textSize="101dp"
-        app:layout_constraintStart_toStartOf="@id/searchBar"
-        app:layout_constraintTop_toBottomOf="@id/searchBar" />
-
-    <TextView
-        android:id="@+id/main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:text="Partly cloudly"
-        android:textColor="@color/black"
-        android:textSize="22dp"
-        app:layout_constraintStart_toStartOf="@id/temperature"
-        app:layout_constraintTop_toBottomOf="@id/temperature" />
-
-
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Prishtine"
-        android:textColor="@color/black"
-        android:textSize="22dp"
-        app:layout_constraintStart_toStartOf="@+id/main"
-        app:layout_constraintTop_toBottomOf="@id/main" />
-
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:id="@+id/card1"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="24dp"-->
-<!--        android:layout_marginTop="104dp"-->
-<!--        android:outlineProvider="none"-->
-<!--        app:cardCornerRadius="8dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.333"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/searchBar"-->
-<!--        app:layout_constraintVertical_bias="0.745">-->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/forecastsList"
-            android:layout_width="0dp"
-            android:layout_height="300dp"
-            android:layout_marginTop="43dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="400dp"
+            android:layout_height="45dp"
+            android:hint="Search"
+            android:inputType="text"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:scrollbarSize="12dp"
+            android:layout_margin="8dp"
+            android:drawableEnd="@drawable/search"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location" />
+            />
 
-        <ProgressBar
-            android:id="@+id/loadMoreloader"
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="224dp"
+            android:layout_height="118dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="21C"
+            android:textColor="@color/black"
+            android:textSize="101dp"
+            app:layout_constraintStart_toStartOf="@id/searchBar"
+            app:layout_constraintTop_toBottomOf="@id/searchBar"
+             />
+
+        <TextView
+            android:id="@+id/main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:text="Partly cloudly"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            app:layout_constraintStart_toStartOf="@id/temperature"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+             />
+
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Prishtine"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            app:layout_constraintStart_toStartOf="@+id/main"
+            app:layout_constraintTop_toBottomOf="@id/main" />
+
+
+
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/location"
+            app:layout_constraintStart_toStartOf="@+id/location"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/linear2"
+            >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:id="@+id/rel1"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/sun"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="-1dp" />
+
+                <TextView
+                    android:id="@+id/descSun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sun"
+                    android:layout_alignStart="@+id/sun"
+                    android:text="UV index" />
+
+                <TextView
+                    android:id="@+id/detailSun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/descSun"
+                    android:layout_alignStart="@+id/descSun"
+                    android:text="UV index" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:id="@+id/rel2"
+
+                >
+
+                <ImageView
+                    android:id="@+id/humidity"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="-1dp" />
+
+                <TextView
+                    android:id="@+id/descHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Humidity"
+                    android:layout_below="@+id/humidity"
+                    />
+                <TextView
+                    android:id="@+id/detailH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UV index"
+                    android:layout_below="@+id/descHumidity"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/linear1"
+            app:layout_constraintStart_toStartOf="@+id/linear1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/hourlyWeather"
+            >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:id="@+id/rel3"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/wind"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="-1dp" />
+
+                <TextView
+                    android:id="@+id/descWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/wind"
+                    android:layout_alignStart="@+id/wind"
+                    android:text="Wind" />
+
+                <TextView
+                    android:id="@+id/detailWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/descWind"
+                    android:layout_alignStart="@+id/descWind"
+                    android:text="10km/h" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:id="@+id/rel4"
+
+                >
+
+                <ImageView
+                    android:id="@+id/SunRS"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="-1dp" />
+
+                <TextView
+                    android:id="@+id/descSunRS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunrise"
+                    android:layout_below="@+id/SunRS"
+                    />
+                <TextView
+                    android:id="@+id/detailSunRS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunrise"
+                    android:layout_below="@+id/descSunRS"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/hourlyWeather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="204dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location"
+            app:layout_constraintVertical_bias="0.0"
+            app:cardCornerRadius="23dp"
+            app:cardBackgroundColor="@color/blue"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="410dp"
+                android:layout_height="170dp"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                />
+            <ProgressBar
+                android:id="@+id/loadHourly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="63dp"
+                />
 
 
-        <!--        <ProgressBar-->
-        <!--            android:id="@+id/loader"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/dailyWeather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hourlyWeather"
+            app:layout_constraintVertical_bias="0.0"
+            app:cardCornerRadius="23dp"
+            app:cardBackgroundColor="@color/blue"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/forecatsList"
+                android:layout_width="410dp"
+                android:layout_height="370dp"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal"
+
+                />
+
+            <ProgressBar
+                android:id="@+id/loadDaily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="63dp"
+                />
+
+        </androidx.cardview.widget.CardView>
 
 
-<!--    </androidx.cardview.widget.CardView>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/forecastsList"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="300dp"-->
+<!--            android:layout_marginTop="43dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/location" />-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <ProgressBar-->
+<!--            android:id="@+id/loadMoreloader"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:visibility="gone"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
+</ScrollView>

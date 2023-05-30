@@ -10,16 +10,16 @@
         android:label="HomeFragment" >
 
 
-        <argument
-            android:name="dataType"
-            android:defaultValue=" "
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="dataSource"
-            android:defaultValue=" "
-            app:argType="string"
-            app:nullable="true" />
+<!--        <argument-->
+<!--            android:name="dataType"-->
+<!--            android:defaultValue=" "-->
+<!--            app:argType="string"-->
+<!--            app:nullable="true" />-->
+<!--        <argument-->
+<!--            android:name="dataSource"-->
+<!--            android:defaultValue=" "-->
+<!--            app:argType="string"-->
+<!--            app:nullable="true" />-->
 
     </fragment>
 
