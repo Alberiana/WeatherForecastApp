@@ -13,6 +13,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
+    var currentPage = 1
     private val weatherRepo = CurrentWeatherRepository()
     private val weatherList = ArrayList<WeatherModel>()
     private val search = ArrayList<WeatherModel>()
@@ -22,26 +23,23 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val weatherData = weatherRepo.getCurrentWeatherData(q, appid)
-
-                // Update the weatherLiveData with the weather data
                 weatherLiveData.value = listOf(weatherData)
             } catch (e: Exception) {
-                Log.d("Tag","thiss is error")
-                // Handle the exception appropriately
+                Log.e("Tag", "Error fetching weather data: ${e.message}", e)
             }
         }
     }
 
-    fun searchCity(query: String) {
-      search.clear()
-        for (weather in weatherList){
-            weather.name?.let{
-                if(it.startsWith(query,true)){
-                    search.add(weather)
-                }
-            }
-        }
-        weatherLiveData.value=search
-    }
+//    fun searchCity(query: String) {
+//      search.clear()
+//        for (weather in weatherList){
+//            weather.name?.let{
+//                if(it.startsWith(query,true)){
+//                    search.add(weather)
+//                }
+//            }
+//        }
+//        weatherLiveData.value=search
+//    }
 
 }

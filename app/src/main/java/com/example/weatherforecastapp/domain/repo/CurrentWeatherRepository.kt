@@ -11,7 +11,7 @@ class CurrentWeatherRepository {
 
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://openweathermap.org/data/2.5/")
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         apiService = retrofit.create(APIService::class.java)
@@ -21,5 +21,6 @@ class CurrentWeatherRepository {
     suspend fun getCurrentWeatherData(q:String, appid:String): WeatherModel=
         apiService.getCurrentWeatherData(q,appid)
 
+//    suspend fun get
 
 }

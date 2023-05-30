@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherforecastapp.databinding.FragmentHomeBinding
 
 
@@ -21,8 +23,7 @@ class HomeFragment : Fragment() {
     private val adapter = WeatherAdapter()
     lateinit var layoutManager: LinearLayoutManager
     private val viewModel: HomeViewModel by viewModels()
-//    private val args: HomeFragmentArgs by navArgs()
-//    private val args: HomeFragmentArgs by navArgs()
+    //private val args:HomeFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,30 +40,23 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
 
-        var searchedCity=binding.searchBar
-
-//        when(args.dataType){
-//            else->viewModel.getWeatherList(searchedCity.toString(), "21c7ee580ddbe56e1dac2d7807624227")
-//
-//        }
 
         with(binding) {
-            layoutManager = LinearLayoutManager(requireActivity())
-//            forecastsList.layoutManager = layoutManager
-
-//            forecastsList.addOnScrollListener(object : OnScrollListener() {
-//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                    super.onScrolled(recyclerView, dx, dy)
-//                }
-//            })
-
+            layoutManager = LinearLayoutManager(activity)
+            dailyForecastList.layoutManager=layoutManager
+            dailyForecastList.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                }
+            })
 
             searchBar.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     val query = binding.searchBar.text.toString().trim()
-                    viewModel.searchCity(query)
-                    // Hide the keyboard
+                    viewModel.getWeatherList(query, "21c7ee580ddbe56e1dac2d7807624227")
+
                     val inputMethodManager =
                         requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputMethodManager.hideSoftInputFromWindow(binding.searchBar.windowToken, 0)
@@ -72,26 +66,39 @@ class HomeFragment : Fragment() {
             }
 
 
+
+//            searchBar.doOnTextChanged{text, start, before,count->
+//                viewModel.searchCity(text.toString())
+//
+//            }
+
+
         }
-        observeViewModel()
 
     }
 
     private fun observeViewModel() {
         viewModel.weatherLiveData.observe(viewLifecycleOwner) { weatherList ->
-            if(weatherList.isNotEmpty()){
-                val weather=weatherList[0]
-                val temperature=weather.main?.temp
-                val cityName=weather.name
+            adapter.forecats = weatherList
+            binding.loadDaily.visibility=View.GONE
+            if (weatherList.isNotEmpty()) {
+                val weatherData = weatherList[0]
+                val temperature = weatherData.main.temp
+                val cityName = weatherData.name
+                val uvIndex=weatherData.main.pressure
+                val humidity=weatherData.main.humidity
+                val wind=weatherData.wind.speed
+                val sunR=weatherData.sys.sunrise
 
-                viewModel.getWeatherList(cityName,"21c7ee580ddbe56e1dac2d7807624227\n")
-                binding.temperature.text=temperature?.toString()?:""
-                binding.location.text=cityName?:""
 
-                adapter.forecats=weatherList
-
+//                val description=weatherData.weather
+                binding.temperature.text = temperature.toString()
+                binding.location.text = cityName
+                binding.detailSun.text=uvIndex.toString()
+                binding.detailH.text=humidity.toString()
+                binding.detailWind.text=wind.toString()
+                binding.detailSunRS.text=sunR.toString()
             }
         }
     }
-
 }
