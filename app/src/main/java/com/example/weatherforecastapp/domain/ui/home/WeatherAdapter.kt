@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherforecastapp.databinding.ItemDayBinding
 import com.example.weatherforecastapp.domain.models.WeatherModel
+import com.example.weatherforecastapp.domain.ui.util.DateUtils.Companion.unixDay
 
 class WeatherAdapter:RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
@@ -14,7 +15,15 @@ class WeatherAdapter:RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
     inner class ViewHolder(val binding: ItemDayBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root){
+        private val context = binding.root.context
+
+//        fun bind(daily: WeatherModel){
+//            with(binding){
+//                day.text=unixDay(WeatherModel.)
+//            }
+//        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDayBinding.inflate(
@@ -30,9 +39,14 @@ class WeatherAdapter:RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val forecast = forecats[position]
         with(holder.binding) {
+            val lat = forecast.coord.lat.toString()
+            val lon = forecast.coord.lon.toString()
+
             minTemp.text=forecast.main.tempMin.toString()
             maxTemp.text=forecast.main.tempMax.toString()
         }
     }
+
+
 
 }

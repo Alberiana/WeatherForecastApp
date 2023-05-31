@@ -30,6 +30,17 @@ class HomeViewModel : ViewModel() {
         }
     }
 
+    fun fetchWeatherData(lat: Double, lon: Double){
+        viewModelScope.launch {
+            try {
+                val weatherData = weatherRepo.fetchWeatherData(lat, lon)
+                weatherLiveData.value = listOf(weatherData)
+            } catch (e: Exception) {
+                Log.e("Tag", "Error fetching weather data: ${e.message}", e)
+            }
+        }
+    }
+
 //    fun searchCity(query: String) {
 //      search.clear()
 //        for (weather in weatherList){

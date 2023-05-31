@@ -1,5 +1,6 @@
 package com.example.weatherforecastapp.API
 
+import com.example.weatherforecastapp.domain.models.Coord
 import com.example.weatherforecastapp.domain.models.Main
 import com.example.weatherforecastapp.domain.models.WeatherModel
 import retrofit2.http.GET
@@ -14,15 +15,12 @@ interface APIService {
     ):WeatherModel
 
     @GET("weather")
-    suspend fun getWeather(
-        @Query("temp") temp:Double
-    ): Main
+    suspend fun fetchWeatherData(
+        @Query("lat") lat: Double,
+        @Query("lon") lon:Double
+    ): WeatherModel
 
 
-    @GET
-    suspend fun getLocation(
-        @Query("name") name:String
-    ):WeatherModel
 
 
 
