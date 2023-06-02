@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightblue">
+    android:background="@color/day"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="8dp"
-            android:src="@drawable/ic_menu"
-            app:layout_constraintEnd_toStartOf="@+id/searchBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/searchBar"
-            android:layout_width="307dp"
-            android:layout_height="41dp"
+            android:layout_width="352dp"
+            android:layout_height="38dp"
             android:layout_margin="8dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/white"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape"
             android:drawableEnd="@drawable/search"
             android:hint="Search"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLines="1"
             android:scrollbarSize="12dp"
+            app:circularflow_defaultRadius="34dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,10 +37,20 @@
             android:layout_height="118dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="21C"
+            android:text="21°C"
             android:textColor="@color/black"
             android:textSize="101dp"
             app:layout_constraintStart_toStartOf="@id/searchBar"
+            app:layout_constraintTop_toBottomOf="@id/searchBar" />
+
+        <ImageView
+            android:layout_width="136dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="52dp"
+            android:src="@drawable/ic_clear_sky_morning"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.548"
+            app:layout_constraintStart_toEndOf="@id/temperature"
             app:layout_constraintTop_toBottomOf="@id/searchBar" />
 
         <TextView
@@ -74,10 +79,9 @@
 
 
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="45dp"
+            android:layout_width="33dp"
+            android:layout_height="36dp"
             android:layout_margin="8dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/baseline_star_border_24"
             app:layout_constraintEnd_toEndOf="parent"
@@ -103,28 +107,35 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:id="@+id/sun"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:id="@+id/pressure"
+                    android:layout_width="67dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="-1dp"
-                    android:src="@drawable/ic_clear_sky_morning" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="77dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="36dp"
+                    android:src="@drawable/ic_pressure" />
 
                 <TextView
                     android:id="@+id/descSun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/sun"
-                    android:layout_alignStart="@+id/sun"
-                    android:text="UV index" />
+                    android:layout_below="@+id/pressure"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="12dp"
+                    android:layout_alignStart="@+id/pressure"
+                    android:text="Pressure" />
 
                 <TextView
                     android:id="@+id/detailSun"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/descSun"
                     android:layout_alignStart="@+id/descSun"
-                    android:text="UV index" />
+                    android:text="Moderate" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -138,24 +149,39 @@
 
                 <ImageView
                     android:id="@+id/humidity"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="-1dp"
+                    android:layout_width="84dp"
+                    android:layout_height="57dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="77dp"
                     android:src="@drawable/ic_humidity" />
 
                 <TextView
                     android:id="@+id/descHumidity"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="25dp"
+                    android:textColor="@color/black"
+
                     android:layout_below="@+id/humidity"
+                    android:layout_alignStart="@+id/humidity"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="-2dp"
                     android:text="Humidity" />
 
                 <TextView
                     android:id="@+id/detailH"
+                    android:textColor="@color/black"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/descHumidity"
-                    android:text="UV index" />
+                    android:layout_alignStart="@+id/descHumidity"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="-1dp"
+                    android:text="76%" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -179,14 +205,20 @@
 
                 <ImageView
                     android:id="@+id/wind"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="84dp"
+                    android:layout_height="62dp"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="-1dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="77dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="36dp"
                     android:src="@drawable/ic_wind" />
 
                 <TextView
                     android:id="@+id/descWind"
+                    android:textColor="@color/black"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/wind"
@@ -195,6 +227,7 @@
 
                 <TextView
                     android:id="@+id/detailWind"
+                    android:textColor="@color/black"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,29 +242,43 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="8dp"
-
                 >
 
                 <ImageView
                     android:id="@+id/SunRS"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="-1dp"
+                    android:layout_width="84dp"
+                    android:layout_height="62dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="77dp"
                     android:src="@drawable/ic_sunrise" />
 
                 <TextView
                     android:id="@+id/descSunRS"
+                    android:textColor="@color/black"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/SunRS"
+                    android:layout_alignStart="@+id/SunRS"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="1dp"
                     android:text="Sunrise" />
 
                 <TextView
                     android:id="@+id/detailSunRS"
+                    android:textColor="@color/black"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/descSunRS"
-                    android:text="Sunrise" />
+                    android:layout_alignStart="@+id/descSunRS"
+                    android:layout_marginStart="-1dp"
+                    android:layout_marginTop="4dp"
+                    android:text="5:00" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -240,7 +287,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="204dp"
-            app:cardBackgroundColor="#8092F6"
+            app:cardBackgroundColor="@color/blue"
             app:cardCornerRadius="23dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -298,21 +345,9 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--        <androidx.recyclerview.widget.RecyclerView-->
-    <!--            android:id="@+id/forecastsList"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="300dp"-->
-    <!--            android:layout_marginTop="43dp"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toBottomOf="@+id/location" />-->
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
-    <!--        <ProgressBar-->
-    <!--            android:id="@+id/loadMoreloader"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:visibility="gone"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent" />-->
+<!--        -->
+<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
+
 </ScrollView>

@@ -18,16 +18,22 @@
             android:defaultValue=" "
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentFavorites2"
+            app:destination="@id/fragmentFavorites2" />
 
 
-<!--        <argument-->
+        <!--        <argument-->
 <!--            android:name="dataSource"-->
 <!--            android:defaultValue=" "-->
 <!--            app:argType="string"-->
 <!--            app:nullable="true" />-->
 
     </fragment>
-
+    <fragment
+        android:id="@+id/fragmentFavorites2"
+        android:name="com.example.weatherforecastapp.domain.ui.favorites.FragmentFavorites"
+        android:label="FragmentFavorites" />
 
 
 </navigation>

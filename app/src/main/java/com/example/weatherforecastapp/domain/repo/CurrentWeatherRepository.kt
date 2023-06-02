@@ -1,7 +1,7 @@
 package com.example.weatherforecastapp.domain.repo
 
 import com.example.weatherforecastapp.API.APIService
-import com.example.weatherforecastapp.domain.models.Coord
+import com.example.weatherforecastapp.domain.forecastModel.ForecastModel
 import com.example.weatherforecastapp.domain.models.WeatherModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +22,7 @@ class CurrentWeatherRepository {
     suspend fun getCurrentWeatherData(q:String, appid:String): WeatherModel=
         apiService.getCurrentWeatherData(q,appid)
 
-    suspend fun fetchWeatherData(lat: Double, lon: Double): WeatherModel=
-        apiService.fetchWeatherData(lat,lon)
+    suspend fun getForecastData(q: String, appid: String): ForecastModel=
+        apiService.fetchWeatherData(q,appid)
 
 }

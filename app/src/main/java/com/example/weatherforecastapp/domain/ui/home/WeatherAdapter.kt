@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherforecastapp.databinding.ItemDayBinding
+import com.example.weatherforecastapp.domain.forecastModel.ForecastModel
 import com.example.weatherforecastapp.domain.models.WeatherModel
-import com.example.weatherforecastapp.domain.ui.util.DateUtils.Companion.unixDay
-
+import java.text.SimpleDateFormat
+import java.util.*
 class WeatherAdapter:RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
     var forecats: List<WeatherModel> = emptyList()
@@ -14,6 +15,7 @@ class WeatherAdapter:RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+
     inner class ViewHolder(val binding: ItemDayBinding) :
         RecyclerView.ViewHolder(binding.root){
         private val context = binding.root.context
@@ -37,16 +39,32 @@ class WeatherAdapter:RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
     override fun getItemCount(): Int =forecats.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val forecast = forecats[position]
-        with(holder.binding) {
-            val lat = forecast.coord.lat.toString()
-            val lon = forecast.coord.lon.toString()
+//        val forecast = forecats[position]
+//        with(holder.binding) {
+//            val datenDay=forecast.main.
+//
+//            maxTemp.text=forecast.list[0].main.tempMax.toString()
 
-            minTemp.text=forecast.main.tempMin.toString()
-            maxTemp.text=forecast.main.tempMax.toString()
         }
     }
 
 
 
-}
+    fun extractDateFromDateTime(dateTimeString: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        val date = inputFormat.parse(dateTimeString)
+        return outputFormat.format(date)
+    }
+
+
+    fun convertDateToDayOfWeek(dateString: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("EEEE", Locale.getDefault())
+
+        val date = inputFormat.parse(dateString)
+        return outputFormat.format(date)
+    }
+
+

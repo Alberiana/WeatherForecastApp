@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherforecastapp.databinding.FragmentHomeBinding
+import com.example.weatherforecastapp.domain.forecastModel.ForecastModel
 import com.example.weatherforecastapp.domain.models.WeatherModel
 import com.example.weatherforecastapp.domain.repo.CurrentWeatherRepository
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -18,6 +19,7 @@ class HomeViewModel : ViewModel() {
     private val weatherList = ArrayList<WeatherModel>()
     private val search = ArrayList<WeatherModel>()
     val weatherLiveData = MutableLiveData<List<WeatherModel>>()
+    val forecastLiveData=MutableLiveData<List<ForecastModel>>()
 
     fun getWeatherList(q: String, appid: String) {
         viewModelScope.launch {
@@ -30,11 +32,11 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun fetchWeatherData(lat: Double, lon: Double){
+    fun getForecastData(q: String, appid: String){
         viewModelScope.launch {
             try {
-                val weatherData = weatherRepo.fetchWeatherData(lat, lon)
-                weatherLiveData.value = listOf(weatherData)
+                val forecastData = weatherRepo.getForecastData(q, appid)
+                forecastLiveData.value = listOf(forecastData)
             } catch (e: Exception) {
                 Log.e("Tag", "Error fetching weather data: ${e.message}", e)
             }
