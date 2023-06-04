@@ -15,7 +15,7 @@ class WeatherAdapter:RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
-
+//The ViewHolder class is defined with a constructor that takes an instance of ItemDayBinding as a parameter.
     inner class ViewHolder(val binding: ItemDayBinding) :
         RecyclerView.ViewHolder(binding.root){
         private val context = binding.root.context
@@ -26,7 +26,8 @@ class WeatherAdapter:RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 //            }
 //        }
     }
-
+//This method is responsible for inflating the item layout and creating a
+// ViewHolder instance for each item in the RecyclerView.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDayBinding.inflate(
             LayoutInflater.from(parent.context),

@@ -21,6 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherForecastApp"
         tools:targetApi="31">
+        <service
+            android:name=".SLocationService"
+            android:enabled="true"
+            android:exported="false" />
         <activity
             android:name="com.example.weatherforecastapp.MainActivity"
 

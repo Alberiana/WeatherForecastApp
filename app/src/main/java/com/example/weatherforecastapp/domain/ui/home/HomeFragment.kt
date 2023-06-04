@@ -2,6 +2,7 @@ package com.example.weatherforecastapp.domain.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,18 +15,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.databinding.FragmentHomeBinding
 import com.example.weatherforecastapp.domain.models.WeatherModel
 
 
 class HomeFragment : Fragment() {
-    var currentPage = 1
     lateinit var binding: FragmentHomeBinding
     private val adapter = WeatherAdapter()
     private val forecastAdapter = ForecastAdapter()
     lateinit var layoutManager: LinearLayoutManager
     private val viewModel: HomeViewModel by viewModels()
     private val args: HomeFragmentArgs by navArgs()
+    private var isLayoutAdded = false
+
+//    val recyclerViewLayout = LayoutInflater.from(context).inflate(R.layout.fragment_home, null)
+//    val recyclerView = recyclerViewLayout.findViewById<RecyclerView>(R.id.dailyForecastList)
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,15 +49,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
-        observeSeconViewModel()
-
-//            val weatherList = arguments?.getParcelableArrayList<Main>("dataType")
-//            if (weatherList != null) {
-//                adapter.forecats=weatherList
-//            }
-
-        // Set up your RecyclerView and adapter here
-
         when (args.dataType) {
 
             else -> viewModel.getForecastData(
@@ -59,8 +56,6 @@ class HomeFragment : Fragment() {
                 "21c7ee580ddbe56e1dac2d7807624227"
             )
         }
-
-
         with(binding) {
             layoutManager = LinearLayoutManager(activity)
             dailyForecastList.adapter = adapter
@@ -70,12 +65,17 @@ class HomeFragment : Fragment() {
                     super.onScrolled(recyclerView, dx, dy)
                 }
             })
-
+            var isSelected = false
+            fav.setOnClickListener {
+                isSelected = !isSelected
+                when (isSelected) {
+                    true -> fav.setImageResource(R.drawable.baseline_star_24)
+                    false -> fav.setImageResource(R.drawable.baseline_star_border_24)
+                }
+            }
 
             searchBar.setOnEditorActionListener { _, actionId, _ ->
-                searchBar.isFocusable = false // Disable focusability of the search bar
-                searchBar.isFocusableInTouchMode = false // Disable touch mode focusability of the search bar
-                searchBar.visibility = View.VISIBLE
+                  searchBar.visibility = View.VISIBLE
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     var query = binding.searchBar.text.toString().trim()
                     viewModel.getWeatherList(query, "21c7ee580ddbe56e1dac2d7807624227")
@@ -88,14 +88,9 @@ class HomeFragment : Fragment() {
                 false
             }
 
-
-
-//            searchBar.doOnTextChanged{text, start, before,count->
-//                viewModel.searchCity(text.toString())
-//
-//            }
-
         }
+        observeSeconViewModel()
+
 
     }
 
@@ -128,12 +123,29 @@ class HomeFragment : Fragment() {
 
     private fun observeSeconViewModel() {
         viewModel.forecastLiveData.observe(viewLifecycleOwner) { forecastList ->
-            forecastAdapter.forecats2 = forecastList
             binding.loadDaily.visibility = View.GONE
-            if (forecastList.isEmpty()) {
-                val forecastData = forecastList[0]
-                val day = forecastData.list[0].dt.toString()
+            if (forecastList.isNotEmpty() && !isLayoutAdded) {
+                Log.d("ForecastList", "Size: ${forecastList.size}")
+
+                val layoutManager = LinearLayoutManager(requireContext())
+                binding.dailyForecastList.layoutManager = layoutManager
+                binding.dailyForecastList.adapter = forecastAdapter
+                forecastAdapter.forecats2 = forecastList
+                forecastAdapter.notifyDataSetChanged()
+
+                isLayoutAdded = true // Set the flag to indicate that the layout has been added
+
+                // Optionally, you can add a loop to iterate through the forecastList
+                // and update the specific data for each item
+                for (i in 0 until forecastList.size) {
+                    val forecastData = forecastList[i]
+                    val day = forecastData.list[0].dtTxt.toString()
+
+                    forecastAdapter.forecats2[i].list[0].dtTxt = day
+                }
             }
         }
     }
+
+
 }

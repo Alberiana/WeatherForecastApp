@@ -15,7 +15,7 @@ interface APIService {
 
 
     @GET("forecast")
-    suspend fun fetchWeatherData(
+    suspend fun getForecastData(
         @Query("q") q: String,
         @Query("appid") appid:String
     ): ForecastModel

@@ -9,7 +9,7 @@ data class DT(
     @SerializedName("dt")
     val dt: Int,
     @SerializedName("dt_txt")
-    val dtTxt: String,
+    var dtTxt: String,
     @SerializedName("main")
     val main: Main,
     @SerializedName("pop")

@@ -42,7 +42,6 @@ class ForecastAdapter:RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
             day.text=datenDay
             maxTemp.text = forecast.list[0].main.tempMax.toString()
             minTemp.text = forecast.list[0].main.tempMin.toString()
-
         }
     }
 
