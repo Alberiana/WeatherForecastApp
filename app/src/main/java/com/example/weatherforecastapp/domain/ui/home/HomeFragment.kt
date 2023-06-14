@@ -29,8 +29,6 @@ class HomeFragment : Fragment() {
     private val args: HomeFragmentArgs by navArgs()
     private var isLayoutAdded = false
 
-//    val recyclerViewLayout = LayoutInflater.from(context).inflate(R.layout.fragment_home, null)
-//    val recyclerView = recyclerViewLayout.findViewById<RecyclerView>(R.id.dailyForecastList)
 
 
     override fun onCreateView(
@@ -49,13 +47,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
-        when (args.dataType) {
 
-            else -> viewModel.getForecastData(
-                viewModel.currentPage.toString(),
-                "21c7ee580ddbe56e1dac2d7807624227"
-            )
-        }
+
+        viewModel.getWeatherList("Prishtina", "21c7ee580ddbe56e1dac2d7807624227")
+        viewModel.getForecastData("Prishtina", "21c7ee580ddbe56e1dac2d7807624227")
+
         with(binding) {
             layoutManager = LinearLayoutManager(activity)
             dailyForecastList.adapter = adapter
@@ -65,6 +61,8 @@ class HomeFragment : Fragment() {
                     super.onScrolled(recyclerView, dx, dy)
                 }
             })
+
+
             var isSelected = false
             fav.setOnClickListener {
                 isSelected = !isSelected
@@ -75,7 +73,7 @@ class HomeFragment : Fragment() {
             }
 
             searchBar.setOnEditorActionListener { _, actionId, _ ->
-                  searchBar.visibility = View.VISIBLE
+                searchBar.visibility = View.VISIBLE
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     var query = binding.searchBar.text.toString().trim()
                     viewModel.getWeatherList(query, "21c7ee580ddbe56e1dac2d7807624227")
@@ -89,9 +87,6 @@ class HomeFragment : Fragment() {
             }
 
         }
-        observeSeconViewModel()
-
-
     }
 
     private fun observeViewModel() {
@@ -119,10 +114,9 @@ class HomeFragment : Fragment() {
                 binding.detailSunRS.text = sunR.toString()
             }
         }
-    }
 
-    private fun observeSeconViewModel() {
-        viewModel.forecastLiveData.observe(viewLifecycleOwner) { forecastList ->
+
+                viewModel.forecastLiveData.observe(viewLifecycleOwner) { forecastList ->
             binding.loadDaily.visibility = View.GONE
             if (forecastList.isNotEmpty() && !isLayoutAdded) {
                 Log.d("ForecastList", "Size: ${forecastList.size}")
@@ -133,10 +127,7 @@ class HomeFragment : Fragment() {
                 forecastAdapter.forecats2 = forecastList
                 forecastAdapter.notifyDataSetChanged()
 
-                isLayoutAdded = true // Set the flag to indicate that the layout has been added
-
-                // Optionally, you can add a loop to iterate through the forecastList
-                // and update the specific data for each item
+                isLayoutAdded = true
                 for (i in 0 until forecastList.size) {
                     val forecastData = forecastList[i]
                     val day = forecastData.list[0].dtTxt.toString()
@@ -146,6 +137,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
 
 }

@@ -10,20 +10,15 @@ import com.example.weatherforecastapp.domain.models.WeatherModel
 class ForecastAdapter:RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
     var forecats2: List<ForecastModel> = emptyList()
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     inner class ViewHolder(val binding: ItemDayBinding) :
         RecyclerView.ViewHolder(binding.root){
         private val context = binding.root.context
 
-//        fun bind(daily: WeatherModel){
-//            with(binding){
-//                day.text=unixDay(WeatherModel.)
-//            }
-//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,7 +41,7 @@ class ForecastAdapter:RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
     }
 
 
-    override fun getItemCount(): Int =forecats2.size
+    override fun getItemCount(): Int = forecats2.size
 
 
 }

@@ -26,6 +26,8 @@ class HomeViewModel : ViewModel() {
             try {
                 val weatherData = weatherRepo.getCurrentWeatherData(q, appid)
                 weatherLiveData.value = listOf(weatherData)
+                Log.d("weatherdata", "Forecast data retrievedd: $weatherData")
+
             } catch (e: Exception) {
                 Log.e("Tag", "Error fetching weather data: ${e.message}", e)
             }
@@ -37,6 +39,8 @@ class HomeViewModel : ViewModel() {
             try {
                 val forecastData = weatherRepo.getForecastData(q, appid)
                 forecastLiveData.value = listOf(forecastData)
+                Log.d("HomeViewModel", "Forecast data retrieved: $forecastData")
+
             } catch (e: Exception) {
                 Log.e("Tag", "Error fetching weather data: ${e.message}", e)
             }
